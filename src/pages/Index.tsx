@@ -17,12 +17,49 @@ import {
   Bell,
   Leaf,
   BarChart3,
-  Settings
+  Settings,
+  Languages
 } from "lucide-react";
+
+const translations = {
+  ml: {
+    greeting: "നമസ്കാരം രാജു! 👋",
+    welcomeBack: "Welcome back to your AI Farming Assistant",
+    setupProfile: "Setup Profile",
+    cropHealth: "Crop Health",
+    activeAlerts: "Active Alerts",
+    estProfit: "Est. Profit",
+    activities: "Activities",
+    dashboard: "Dashboard",
+    aiChat: "AI Chat",
+    advisory: "Advisory",
+    recentAdvisory: "Recent Advisory",
+    active: "Active",
+    translateTo: "English"
+  },
+  en: {
+    greeting: "Hello Raju! 👋",
+    welcomeBack: "Welcome back to your AI Farming Assistant",
+    setupProfile: "Setup Profile",
+    cropHealth: "Crop Health",
+    activeAlerts: "Active Alerts",
+    estProfit: "Est. Profit",
+    activities: "Activities",
+    dashboard: "Dashboard",
+    aiChat: "AI Chat",
+    advisory: "Advisory",
+    recentAdvisory: "Recent Advisory",
+    active: "Active",
+    translateTo: "മലയാളം"
+  }
+};
 
 const Index = () => {
   const [showOnboarding, setShowOnboarding] = useState(false);
   const [activeTab, setActiveTab] = useState("dashboard");
+  const [language, setLanguage] = useState<'ml' | 'en'>('ml');
+  
+  const t = translations[language];
 
   if (showOnboarding) {
     return <OnboardingForm />;
@@ -43,13 +80,23 @@ const Index = () => {
         <div className="mb-8">
           <div className="flex items-center justify-between mb-4">
             <div>
-              <h1 className="text-3xl font-bold text-foreground">നമസ്കാരം രാജു! 👋</h1>
-              <p className="text-muted-foreground">Welcome back to your AI Farming Assistant</p>
+              <h1 className="text-3xl font-bold text-foreground">{t.greeting}</h1>
+              <p className="text-muted-foreground">{t.welcomeBack}</p>
             </div>
-            <Button variant="outline" onClick={() => setShowOnboarding(true)}>
-              <User className="h-4 w-4 mr-2" />
-              Setup Profile
-            </Button>
+            <div className="flex items-center space-x-2">
+              <Button 
+                variant="ghost" 
+                size="sm"
+                onClick={() => setLanguage(language === 'ml' ? 'en' : 'ml')}
+              >
+                <Languages className="h-4 w-4 mr-2" />
+                {t.translateTo}
+              </Button>
+              <Button variant="outline" onClick={() => setShowOnboarding(true)}>
+                <User className="h-4 w-4 mr-2" />
+                {t.setupProfile}
+              </Button>
+            </div>
           </div>
 
           {/* Quick Stats */}
@@ -58,7 +105,7 @@ const Index = () => {
               <CardContent className="p-4 text-center">
                 <Leaf className="h-8 w-8 text-success mx-auto mb-2" />
                 <div className="text-2xl font-bold text-success">85%</div>
-                <div className="text-sm text-muted-foreground">Crop Health</div>
+                <div className="text-sm text-muted-foreground">{t.cropHealth}</div>
               </CardContent>
             </Card>
             
@@ -66,7 +113,7 @@ const Index = () => {
               <CardContent className="p-4 text-center">
                 <Bell className="h-8 w-8 text-warning mx-auto mb-2" />
                 <div className="text-2xl font-bold text-warning">3</div>
-                <div className="text-sm text-muted-foreground">Active Alerts</div>
+                <div className="text-sm text-muted-foreground">{t.activeAlerts}</div>
               </CardContent>
             </Card>
             
@@ -74,7 +121,7 @@ const Index = () => {
               <CardContent className="p-4 text-center">
                 <BarChart3 className="h-8 w-8 text-primary mx-auto mb-2" />
                 <div className="text-2xl font-bold text-primary">₹45K</div>
-                <div className="text-sm text-muted-foreground">Est. Profit</div>
+                <div className="text-sm text-muted-foreground">{t.estProfit}</div>
               </CardContent>
             </Card>
             
@@ -82,7 +129,7 @@ const Index = () => {
               <CardContent className="p-4 text-center">
                 <Calendar className="h-8 w-8 text-accent mx-auto mb-2" />
                 <div className="text-2xl font-bold text-accent">12</div>
-                <div className="text-sm text-muted-foreground">Activities</div>
+                <div className="text-sm text-muted-foreground">{t.activities}</div>
               </CardContent>
             </Card>
           </div>
@@ -93,19 +140,19 @@ const Index = () => {
           <TabsList className="grid w-full grid-cols-2 md:grid-cols-4 mb-8">
             <TabsTrigger value="dashboard" className="flex items-center space-x-2">
               <Home className="h-4 w-4" />
-              <span className="hidden sm:inline">Dashboard</span>
+              <span className="hidden sm:inline">{t.dashboard}</span>
             </TabsTrigger>
             <TabsTrigger value="chat" className="flex items-center space-x-2">
               <MessageCircle className="h-4 w-4" />
-              <span className="hidden sm:inline">AI Chat</span>
+              <span className="hidden sm:inline">{t.aiChat}</span>
             </TabsTrigger>
             <TabsTrigger value="advisory" className="flex items-center space-x-2">
               <TrendingUp className="h-4 w-4" />
-              <span className="hidden sm:inline">Advisory</span>
+              <span className="hidden sm:inline">{t.advisory}</span>
             </TabsTrigger>
             <TabsTrigger value="activities" className="flex items-center space-x-2">
               <Calendar className="h-4 w-4" />
-              <span className="hidden sm:inline">Activities</span>
+              <span className="hidden sm:inline">{t.activities}</span>
             </TabsTrigger>
           </TabsList>
 
@@ -121,9 +168,9 @@ const Index = () => {
                 <div className="flex items-center justify-between">
                   <CardTitle className="flex items-center space-x-2">
                     <TrendingUp className="h-5 w-5 text-primary" />
-                    <span>Recent Advisory</span>
+                    <span>{t.recentAdvisory}</span>
                   </CardTitle>
-                  <Badge variant="outline">3 Active</Badge>
+                  <Badge variant="outline">3 {t.active}</Badge>
                 </div>
               </CardHeader>
               <CardContent>
