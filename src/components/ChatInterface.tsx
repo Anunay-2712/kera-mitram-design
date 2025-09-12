@@ -5,6 +5,7 @@ import { Input } from "@/components/ui/input";
 import { ScrollArea } from "@/components/ui/scroll-area";
 import { Avatar, AvatarFallback } from "@/components/ui/avatar";
 import { Send, Mic, MicOff, Bot, User } from "lucide-react";
+import { useTranslations } from "@/hooks/useTranslations";
 
 interface Message {
   id: string;
@@ -15,6 +16,7 @@ interface Message {
 }
 
 const ChatInterface = () => {
+  const { t } = useTranslations();
   const [messages, setMessages] = useState<Message[]>([
     {
       id: '1',
@@ -93,10 +95,10 @@ const ChatInterface = () => {
   };
 
   const quickQuestions = [
-    "എന്റെ വിളയുടെ അവസ്ഥ എങ്ങനെ?",
-    "ഇന്നത്തെ കാലാവസ്ഥ എന്ത്?", 
-    "പുതിയ കീടങ്ങളെ കാണുന്നു",
-    "വള നിർദ്ദേശം വേണം"
+    t('quickQuestion1'),
+    t('quickQuestion2'), 
+    t('quickQuestion3'),
+    t('quickQuestion4')
   ];
 
   return (
@@ -108,8 +110,8 @@ const ChatInterface = () => {
             <Bot className="h-6 w-6" />
           </div>
           <div>
-            <h2 className="font-semibold text-lg">കൃഷി സഹായി</h2>
-            <p className="text-sm opacity-90">AI Farming Assistant</p>
+            <h2 className="font-semibold text-lg">{t('farmingAssistant')}</h2>
+            <p className="text-sm opacity-90">{t('aiFarmingAssistant')}</p>
           </div>
         </div>
       </div>
@@ -196,7 +198,7 @@ const ChatInterface = () => {
               value={inputText}
               onChange={(e) => setInputText(e.target.value)}
               onKeyPress={handleKeyPress}
-              placeholder="മലയാളത്തിൽ അല്ലെങ്കിൽ ഇംഗ്ലീഷിൽ ചോദിക്കൂ..."
+              placeholder={t('chatPlaceholder')}
               className="flex-1"
             />
             <Button

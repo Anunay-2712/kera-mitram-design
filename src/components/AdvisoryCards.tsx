@@ -1,6 +1,7 @@
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
+import { useTranslations } from "@/hooks/useTranslations";
 import { 
   AlertTriangle, 
   CheckCircle, 
@@ -27,6 +28,7 @@ interface Advisory {
 }
 
 const AdvisoryCards = () => {
+  const { t } = useTranslations();
   const advisories: Advisory[] = [
     {
       id: '1',
@@ -148,11 +150,11 @@ const AdvisoryCards = () => {
     <div className="space-y-4">
       <div className="flex items-center justify-between mb-6">
         <div>
-          <h2 className="text-2xl font-bold text-foreground">സ്മാർട്ട് ഉപദേശങ്ങൾ</h2>
-          <p className="text-muted-foreground">Personalized AI Advisory</p>
+          <h2 className="text-2xl font-bold text-foreground">{t('smartAdvisoryTitle')}</h2>
+          <p className="text-muted-foreground">{t('personalizedAI')}</p>
         </div>
         <Button variant="outline" size="sm">
-          View All
+          {t('viewAll')}
         </Button>
       </div>
 
@@ -208,7 +210,7 @@ const AdvisoryCards = () => {
                 
                 {advisory.actionRequired && (
                   <Button size="sm" variant="outline" className="text-xs">
-                    Take Action
+                    {t('takeAction')}
                   </Button>
                 )}
               </div>
@@ -223,19 +225,19 @@ const AdvisoryCards = () => {
           <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
             <div className="text-center">
               <div className="text-2xl font-bold text-destructive">2</div>
-              <div className="text-sm text-muted-foreground">Urgent Actions</div>
+              <div className="text-sm text-muted-foreground">{t('urgentActions')}</div>
             </div>
             <div className="text-center">
               <div className="text-2xl font-bold text-warning">1</div>
-              <div className="text-sm text-muted-foreground">Warnings</div>
+              <div className="text-sm text-muted-foreground">{t('warnings')}</div>
             </div>
             <div className="text-center">
               <div className="text-2xl font-bold text-primary">3</div>
-              <div className="text-sm text-muted-foreground">Suggestions</div>
+              <div className="text-sm text-muted-foreground">{t('suggestions')}</div>
             </div>
             <div className="text-center">
               <div className="text-2xl font-bold text-success">1</div>
-              <div className="text-sm text-muted-foreground">All Good</div>
+              <div className="text-sm text-muted-foreground">{t('allGood')}</div>
             </div>
           </div>
         </CardContent>
